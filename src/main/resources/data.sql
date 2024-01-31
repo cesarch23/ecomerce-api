@@ -1,4 +1,4 @@
-
+/*
 CREATE TABLE  IF NOT EXISTS
     clients (
     client_id INT,
@@ -38,7 +38,9 @@ CREATE TABLE IF NOT EXISTS
     CONSTRAINT fK_sale_details_sale FOREIGN KEY (sale_id) REFERENCES sales(sale_id),
     CONSTRAINT fk_sale_details_products FOREIGN KEY (product_id) REFERENCES products(product_id)
     );
+*/
 
+/*
 INSERT INTO clients (client_id, client_name, client_lastname, client_dni) VALUES
     (1, 'Juan', 'Fuentes Perez', '1234587'),
     (2, 'Maria', 'Gomez Rodriguez', '9876543'),
@@ -68,3 +70,5 @@ INSERT INTO sale_details (sale_detail_id, sale_detail_amount, sale_detail_price,
    (3, 2, 10.00 , 3, 3),
    (4, 2, 10.00 , 4, 4),
    (5, 2, 10.00 , 5, 5);
+
+ */
