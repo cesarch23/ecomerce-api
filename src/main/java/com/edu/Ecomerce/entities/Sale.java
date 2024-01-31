@@ -18,7 +18,7 @@ public class Sale {
     @Column(name = "sale_total")
     private Double total ;
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "fk_sales_clients")
+    @JoinColumn(name = "client_id", referencedColumnName = "client_id", foreignKey = @ForeignKey(name = "fk_sales_clients"))
     private Client client;
 
     public Sale() {
