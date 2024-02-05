@@ -1,4 +1,4 @@
-package com.edu.Ecomerce.entities;
+package com.edu.Ecomerce.Entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
