@@ -1,8 +1,15 @@
 package com.edu.Ecomerce.Entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.List;
+
+
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Data
 @Table(name = "products")
@@ -19,13 +26,8 @@ public class Product {
     private int stock;
     @Column(name = "product_price")
     private double price;
+    //@OneToMany(mappedBy = "product")
+    //List<SaleDetails> listDetail;
 
-    public  Product(){}
-    public Product(int id, String description, String code, int stock, double price) {
-        this.id = id;
-        this.description = description;
-        this.code = code;
-        this.stock = stock;
-        this.price = price;
-    }
+
 }

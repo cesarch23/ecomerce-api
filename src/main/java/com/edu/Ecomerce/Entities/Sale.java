@@ -1,10 +1,18 @@
 package com.edu.Ecomerce.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
+
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Data
 @Table(name = "sales")
@@ -14,20 +22,15 @@ public class Sale {
     @Column(name = "sale_id")
     private int id;
     @Column(name = "sale_purchase_date")
-    private Date purchaseDate ;
+    private LocalDate purchaseDate ;
     @Column(name = "sale_total")
     private Double total ;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "client_id", referencedColumnName = "client_id", foreignKey = @ForeignKey(name = "fk_sales_clients"))
     private Client client;
+    // @OneToMany(mappedBy = "sale")
+    // List<SaleDetails> listDetails;
 
-    public Sale() {
-    }
 
-    public Sale(int id, Date purchaseDate, Double total, Client client) {
-        this.id = id;
-        this.purchaseDate = purchaseDate;
-        this.total = total;
-        this.client = client;
-    }
+
 }

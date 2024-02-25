@@ -1,9 +1,13 @@
 package com.edu.Ecomerce.Entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Table(name = "clients")
 public class Client {
@@ -18,14 +22,7 @@ public class Client {
     @Column(name = "client_dni" , length = 8)
     private String dni;
 
-    public Client() {
-    }
-    public Client(int id, String name, String lastname, String dni) {
-        this.id = id;
-        this.name = name;
-        this.lastname = lastname;
-        this.dni = dni;
-    }
+
 
 
 }

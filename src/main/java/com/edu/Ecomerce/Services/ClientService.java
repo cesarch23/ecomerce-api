@@ -1,10 +1,12 @@
 package com.edu.Ecomerce.Services;
 
+import com.edu.Ecomerce.DTO.ClientDTO;
 import com.edu.Ecomerce.Entities.Client;
 import com.edu.Ecomerce.Repositories.ClientRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,32 +19,40 @@ public class ClientService {
         this.clientRepository = clientRepository;
     }
 
-    public List<Client> getAll(){
-        return  clientRepository.findAll();
+    public List<ClientDTO> getAll(){
+        List<Client> clients = clientRepository.findAll();
+        List<ClientDTO> dtos = new ArrayList<>( );
+        for ( Client c:clients  )  {
+            dtos.add(convertToDTO(c));
+        }
+        return dtos;
     }
-    public Client getById(int id){
-        return clientRepository.findById(id).
+    public ClientDTO getById(int id){
+        Client c = clientRepository.findById(id).
                 orElseThrow(()->new EntityNotFoundException("cliente no encontrado"));
+        return convertToDTO(c);
     }
-    public Client create(Client client){
-         return clientRepository.save(client);
+    public ClientDTO create(ClientDTO clientDto){
+        Client c = clientRepository.save(convertToClient(clientDto));
+        return  convertToDTO(c);
     }
-    public Client update(Client client){
-        if(clientRepository.existsById(client.getId())){
-        return clientRepository.save(client);
+    public ClientDTO update(ClientDTO clientDTO){
+        Client client = convertToClient(clientDTO);
+
+        if(clientRepository.existsById(client.getId())) {
+            client = clientRepository.save(client);
+            return convertToDTO(client);
         }
-        else{
         throw new EntityNotFoundException("cliente no encontrado");
-        }
+
     }
-    public boolean delete(int id) {
-        try {
-            Client c = getById(id);
-            clientRepository.delete(c);
-            return true;
-        } catch (EntityNotFoundException ex) {
-            return false;
-        }
+
+    public  Client convertToClient(ClientDTO clientDTO){
+        return new Client(clientDTO.getId(),clientDTO.getName(),clientDTO.getLastname(),clientDTO.getDni());
+    }
+
+    public  ClientDTO convertToDTO(Client cli){
+        return  new ClientDTO(cli.getId(),cli.getName(),cli.getLastname(),cli.getDni());
     }
 
 }
