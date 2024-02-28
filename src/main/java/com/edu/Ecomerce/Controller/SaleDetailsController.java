@@ -16,20 +16,15 @@ import java.util.List;
 public class SaleDetailsController {
     @Autowired
     SaleDetailsService saleDetailsService;
+
+    /**
+     * Obtiene la lista de todos los detalles de ventas.
+     *
+     * @return ResponseEntity con la lista de objetos SaleDetails y un código de estado 200 OK.
+     */
     @GetMapping("/all")
     public ResponseEntity<List<SaleDetails>> getAll(){
         return ResponseEntity.ok(saleDetailsService.getAll());
     }
-    @PostMapping("/add")
-    public ResponseEntity<SaleDetails> add(@RequestBody SaleDetails saledeta){
-        SaleDetails sd;
-        try{
-           sd = saleDetailsService.create(saledeta);
-        }
-        catch (Exception e){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"no se agrego details");
-        }
-        return ResponseEntity.ok(sd);
 
-    }
 }

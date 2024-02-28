@@ -21,12 +21,25 @@ public class ClientController {
         this.clientService = clientService;
     }
 
+
+    /**
+     * Obtiene la lista de todos los clientes.
+     *
+     * @return Lista de objetos ClientDTO que representan a todos los clientes.
+     */
     @GetMapping("/all")
     public List<ClientDTO> getAll()
     {
         return clientService.getAll();
     }
 
+    /**
+     * Crea un nuevo cliente.
+     *
+     * @param clientDTO Objeto ClientDTO que contiene los datos del nuevo cliente.
+     * @return ResponseEntity con el objeto ClientDTO creado y un código de estado 200 OK.
+     *         En caso de error, puede lanzar ResponseStatusException con un código de estado diferente.
+     */
     @PostMapping("/add")
     public ResponseEntity<ClientDTO> create(@RequestBody ClientDTO clientDTO){
         ClientDTO dto;
@@ -38,6 +51,13 @@ public class ClientController {
         }
         return  ResponseEntity.ok(dto);
     }
+    /**
+     * Actualiza los datos de un cliente existente.
+     *
+     * @param clientDTO Objeto ClientDTO que contiene los datos actualizados del cliente.
+     * @return ResponseEntity con el objeto ClientDTO actualizado y un código de estado 200 OK.
+     *         En caso de error, puede lanzar ResponseStatusException con un código de estado diferente.
+     */
     @PutMapping("/update")
     public ResponseEntity<ClientDTO> update(@RequestBody ClientDTO clientDTO) {
         ClientDTO dto;
